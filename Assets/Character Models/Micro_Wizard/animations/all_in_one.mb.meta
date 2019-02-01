@@ -3,6 +3,79 @@ guid: 8bf5855239274fd43842c482e9bf0df0
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: body_wizard
+    100004: brows_wizard
+    100006: butt_wizard
+    100008: eye_l_wizard
+    100010: eye_r_wizard
+    100012: hair_01_wizard
+    100014: hair_02_wizard
+    100016: hair_03_wizard
+    100018: hair_04_wizard
+    100020: hat_01_wizard
+    100022: hat_02_wizard
+    100024: hat_03_wizard
+    100026: head_wizard
+    100028: left_arm_wizard
+    100030: left_finger_01_wizard
+    100032: left_finger_02_wizard
+    100034: left_hand_wizard
+    100036: left_shoulder_wizard
+    100038: left_thumb_wizard
+    100040: micro_wizard
+    100042: micro_wizard_alpha
+    100044: right_arm_wizard
+    100046: right_finger_01_wizard
+    100048: right_finger_02_wizard
+    100050: right_hand_wizard
+    100052: right_shoulder_wizard
+    100054: right_thumb_wizard
+    100056: robes_back_wizard
+    100058: robes_front_wizard
+    100060: robes_left_wizard
+    100062: robes_right_wizard
+    100064: root
+    400000: //RootNode
+    400002: body_wizard
+    400004: brows_wizard
+    400006: butt_wizard
+    400008: eye_l_wizard
+    400010: eye_r_wizard
+    400012: hair_01_wizard
+    400014: hair_02_wizard
+    400016: hair_03_wizard
+    400018: hair_04_wizard
+    400020: hat_01_wizard
+    400022: hat_02_wizard
+    400024: hat_03_wizard
+    400026: head_wizard
+    400028: left_arm_wizard
+    400030: left_finger_01_wizard
+    400032: left_finger_02_wizard
+    400034: left_hand_wizard
+    400036: left_shoulder_wizard
+    400038: left_thumb_wizard
+    400040: micro_wizard
+    400042: micro_wizard_alpha
+    400044: right_arm_wizard
+    400046: right_finger_01_wizard
+    400048: right_finger_02_wizard
+    400050: right_hand_wizard
+    400052: right_shoulder_wizard
+    400054: right_thumb_wizard
+    400056: robes_back_wizard
+    400058: robes_front_wizard
+    400060: robes_left_wizard
+    400062: robes_right_wizard
+    400064: root
+    2100000: wizard
+    2100002: wizard_alpha
+    4300000: micro_wizard
+    4300002: micro_wizard_alpha
+    9500000: //RootNode
+    13700000: micro_wizard
+    13700002: micro_wizard_alpha
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -38,7 +111,6 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -57,15 +129,12 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

@@ -3,6 +3,91 @@ guid: 16157ea2ffaf23541a2cc9c77d17b5a7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: alpha
+    100004: body
+    100006: body_druid
+    100008: butt_druid
+    100010: ear_left
+    100012: ear_right
+    100014: eye_l_druid
+    100016: eye_r_druid
+    100018: face_druid
+    100020: hair_druid
+    100022: head_druid
+    100024: left_arm_druid
+    100026: left_hand_druid
+    100028: left_index_01
+    100030: left_index_02
+    100032: left_middle_01
+    100034: left_middle_02
+    100036: left_pinky_01
+    100038: left_pinky_02
+    100040: left_shoulder_druid
+    100042: left_thumb_01
+    100044: left_thumb_02
+    100046: right_arm_druid
+    100048: right_hand_druid
+    100050: right_index_01
+    100052: right_index_02
+    100054: right_middle_01
+    100056: right_middle_02
+    100058: right_pinky_01
+    100060: right_pinky_02
+    100062: right_shoulder_druid
+    100064: right_thumb_01
+    100066: right_thumb_02
+    100068: root_druid
+    100070: skirt_back
+    100072: skirt_front
+    100074: skirt_left
+    100076: skirt_right
+    400000: //RootNode
+    400002: alpha
+    400004: body
+    400006: body_druid
+    400008: butt_druid
+    400010: ear_left
+    400012: ear_right
+    400014: eye_l_druid
+    400016: eye_r_druid
+    400018: face_druid
+    400020: hair_druid
+    400022: head_druid
+    400024: left_arm_druid
+    400026: left_hand_druid
+    400028: left_index_01
+    400030: left_index_02
+    400032: left_middle_01
+    400034: left_middle_02
+    400036: left_pinky_01
+    400038: left_pinky_02
+    400040: left_shoulder_druid
+    400042: left_thumb_01
+    400044: left_thumb_02
+    400046: right_arm_druid
+    400048: right_hand_druid
+    400050: right_index_01
+    400052: right_index_02
+    400054: right_middle_01
+    400056: right_middle_02
+    400058: right_pinky_01
+    400060: right_pinky_02
+    400062: right_shoulder_druid
+    400064: right_thumb_01
+    400066: right_thumb_02
+    400068: root_druid
+    400070: skirt_back
+    400072: skirt_front
+    400074: skirt_left
+    400076: skirt_right
+    2100000: micro_druid
+    2100002: micro_druid_transp
+    4300000: body
+    4300002: alpha
+    9500000: //RootNode
+    13700000: alpha
+    13700002: body
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -38,7 +123,6 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -57,15 +141,12 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
