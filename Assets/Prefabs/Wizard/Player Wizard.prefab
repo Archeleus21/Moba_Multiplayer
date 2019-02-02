@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 309158367862569131}
   - component: {fileID: 1561257422194993649}
   - component: {fileID: 1561257422194993648}
+  - component: {fileID: 3074587190010924805}
+  - component: {fileID: 6884426436102446136}
   m_Layer: 0
   m_Name: Player Wizard
   m_TagString: Untagged
@@ -98,10 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d71a4bf5107064f94553e8d60fc3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 8793246031994704306, guid: 4dcc641163edc7445b30ab546525ddd5,
+    type: 3}
   targetEnemy: {fileID: 0}
   EnemyList:
-  - {fileID: 0}
+  - {fileID: 7249466095670306899, guid: 594efcc6473660d4ab3622ae5bbec5f3, type: 3}
   fireballPrefab: {fileID: 4093647522165319373, guid: 72d5fce736a64174e82103859a485875,
     type: 3}
   firePoint: {fileID: 1561257422993918366}
@@ -129,6 +132,61 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3074587190010924805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309158367855168259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &6884426436102446136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309158367855168259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &309158367855168261
 GameObject:
   m_ObjectHideFlags: 0

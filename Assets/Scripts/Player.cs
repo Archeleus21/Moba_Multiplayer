@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Networking;
 
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     [SerializeField] private Camera mainCamera;  //reference to the camera
     [SerializeField] private Transform targetEnemy;  //reference to enemy
     [SerializeField] private List<Transform> EnemyList; //stores enemies
     [SerializeField] private GameObject fireballPrefab;  //reference to fireball
     [SerializeField] private Transform firePoint;  //reference to fire point transform
+    [SerializeField] private GameObject playerIdentification; //reference to the local player
     [SerializeField] private float shootRange;  //range for shooting
     [SerializeField] private float shootSpeed;  //attack speed
 
@@ -22,11 +24,17 @@ public class Player : MonoBehaviour
     private bool enemyClicked;  //clicked on enemy?
     private bool isWalking;  //am i walking?
 
+    public override void OnStartLocalPlayer()
+    {
+        playerIdentification.SetActive(true);
+    }
+
     // Use this for initialization
     void Start()
     {
         Assert.IsNotNull(fireballPrefab);
         Assert.IsNotNull(firePoint);
+        Assert.IsNotNull(playerIdentification);
         animator = GetComponent<Animator>();  //grabs animator component
         navAgent = GetComponent<NavMeshAgent>();  //grabs navmeshagent
     }
@@ -34,6 +42,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //checks if local player is controlling this gameObject
+        if(!isLocalPlayer)
+        {
+            return;
+        }
 
         PlayerControls();
 
@@ -127,7 +140,7 @@ public class Player : MonoBehaviour
             if(Time.time > shootSpeed)
             {
                 shootSpeed = Time.time + rechargeTime;
-                Fire();
+                CmdFire();
             }
             
             //stops movement and animation
@@ -136,7 +149,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Fire()
+    //used to send commands to the server
+    [Command]
+    private void CmdFire()  //functions needs to have the Cmd prefix is order to send server spawnable objects
     {
         StartCoroutine(FirebalDelay());
     }
@@ -148,6 +163,8 @@ public class Player : MonoBehaviour
         //fireballGO.SetActive(true);
         yield return new WaitForSeconds(2.0f);
         fireballGO.GetComponentInChildren<Rigidbody>().velocity = fireballGO.transform.forward * 20f;
+
+        NetworkServer.Spawn(fireballGO);  //tells server to spawn fireball
         Destroy(fireballGO, 5f);
 
     }
