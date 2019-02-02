@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.Assertions;
+
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;  //reference to the camera
     [SerializeField] private Transform targetEnemy;  //reference to enemy
-    [SerializeField] private List<Transform> EnemyList;
+    [SerializeField] private List<Transform> EnemyList; //stores enemies
+    [SerializeField] private GameObject fireballPrefab;  //reference to fireball
+    [SerializeField] private Transform firePoint;  //reference to fire point transform
     [SerializeField] private float shootRange;  //range for shooting
     [SerializeField] private float shootSpeed;  //attack speed
 
@@ -21,6 +25,8 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Assert.IsNotNull(fireballPrefab);
+        Assert.IsNotNull(firePoint);
         animator = GetComponent<Animator>();  //grabs animator component
         navAgent = GetComponent<NavMeshAgent>();  //grabs navmeshagent
     }
@@ -132,6 +138,17 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
+        StartCoroutine(FirebalDelay());
+    }
+
+    IEnumerator FirebalDelay()
+    {
         animator.SetTrigger("CastSpell");
+        GameObject fireballGO = Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
+        //fireballGO.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        fireballGO.GetComponentInChildren<Rigidbody>().velocity = fireballGO.transform.forward * 20f;
+        Destroy(fireballGO, 5f);
+
     }
 }
