@@ -11,6 +11,10 @@ public class Player : NetworkBehaviour
     [SerializeField] private Camera mainCamera;  //reference to the camera
     [SerializeField] private Transform targetEnemy;  //reference to enemy
     [SerializeField] private List<Transform> EnemyList; //stores enemies
+    //-----------------------------------------------------------------------
+    //testing purposes for enemy
+    Transform enemyTest;
+    //---------------------------------------------------------------------
     [SerializeField] private GameObject fireballPrefab;  //reference to fireball
     [SerializeField] private Transform firePoint;  //reference to fire point transform
     [SerializeField] private GameObject playerIdentification; //reference to the local player
@@ -37,6 +41,10 @@ public class Player : NetworkBehaviour
         Assert.IsNotNull(playerIdentification);
         animator = GetComponent<Animator>();  //grabs animator component
         navAgent = GetComponent<NavMeshAgent>();  //grabs navmeshagent
+
+        enemyTest = GameObject.Find("Enemy Orc (green)").GetComponent<Transform>();
+        EnemyList.Add(enemyTest);
+
     }
 
     // Update is called once per frame
@@ -45,6 +53,8 @@ public class Player : NetworkBehaviour
         //checks if local player is controlling this gameObject
         if(!isLocalPlayer)
         {
+            playerIdentification.SetActive(false);
+            mainCamera.gameObject.SetActive(false);
             return;
         }
 
@@ -88,11 +98,11 @@ public class Player : NetworkBehaviour
                     }
                 }
 
-                ////checks player has a targetEnemy
-                //if (targetEnemy != null)
-                //{
-                //    enemyClicked = true;  //clicked enemy
-                //}
+                //checks player has a targetEnemy
+                if (targetEnemy != null)
+                {
+                    enemyClicked = true;  //clicked enemy
+                }
 
             }
         }
