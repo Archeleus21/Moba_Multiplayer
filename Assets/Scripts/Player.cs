@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 
 
-public class Player : NetworkBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;  //reference to the camera
-    [SerializeField] private Transform targetEnemy;  //reference to enemy
-    [SerializeField] private List<Transform> EnemyList; //stores enemies
-    //-----------------------------------------------------------------------
-    //testing purposes for enemy
-    Transform enemyTest;
-    //---------------------------------------------------------------------
+    [SerializeField] private GameObject targetEnemy;  //reference to enemy
     [SerializeField] private GameObject fireballPrefab;  //reference to fireball
     [SerializeField] private Transform firePoint;  //reference to fire point transform
     [SerializeField] private GameObject playerIdentification; //reference to the local player
@@ -28,10 +23,10 @@ public class Player : NetworkBehaviour
     private bool enemyClicked;  //clicked on enemy?
     private bool isWalking;  //am i walking?
 
-    public override void OnStartLocalPlayer()
-    {
-        playerIdentification.SetActive(true);
-    }
+    //public override void OnStartLocalPlayer()
+    //{
+    //    playerIdentification.SetActive(true);
+    //}
 
     // Use this for initialization
     void Start()
@@ -42,21 +37,18 @@ public class Player : NetworkBehaviour
         animator = GetComponent<Animator>();  //grabs animator component
         navAgent = GetComponent<NavMeshAgent>();  //grabs navmeshagent
 
-        enemyTest = GameObject.Find("Enemy Orc (green)").GetComponent<Transform>();
-        EnemyList.Add(enemyTest);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //checks if local player is controlling this gameObject
-        if(!isLocalPlayer)
-        {
-            playerIdentification.SetActive(false);
-            mainCamera.gameObject.SetActive(false);
-            return;
-        }
+        ////checks if local player is controlling this gameObject
+        //if(!isLocalPlayer)
+        //{
+        //    playerIdentification.SetActive(false);
+        //    mainCamera.gameObject.SetActive(false);
+        //    return;
+        //}
 
         PlayerControls();
 
@@ -80,12 +72,15 @@ public class Player : NetworkBehaviour
             //raycast from mouse position, (shoots ray, outputs what it hit, distance ray goes)
             if (Physics.Raycast(ray, out hit, 100))
             {
+
                 //contains list of enemies in game and checks if clicked
-                foreach(Transform enemy in EnemyList)
+                foreach(GameObject enemy in GameManager.Instance.playerMinionList)  ///update to enemy list
                 {
-                    if(hit.collider.transform == enemy)
+                    if(hit.collider.gameObject == enemy)
                     {
-                        targetEnemy = hit.transform;  //make clicked enemy the target enemy
+                        print("raycast: " + hit.transform.name);
+                        targetEnemy = hit.transform.gameObject;  //make clicked enemy the target enemy
+                        print("my target: " + targetEnemy.name);
                         enemyClicked = true;  //clicked enemy
                     }
                     else  //otherwise move character
@@ -106,6 +101,7 @@ public class Player : NetworkBehaviour
 
             }
         }
+
         //checks if destination was reached or in range of an enemy, then stops walking
         if (navAgent.remainingDistance <= navAgent.stoppingDistance  || (navAgent.remainingDistance <= shootRange && targetEnemy != null))
         {
@@ -130,7 +126,7 @@ public class Player : NetworkBehaviour
         }
 
         //makes enemy target new desitination
-        navAgent.destination = targetEnemy.position;
+        navAgent.destination = targetEnemy.transform.position;
 
 
         //checks for range
@@ -144,13 +140,13 @@ public class Player : NetworkBehaviour
         if (navAgent.remainingDistance <=shootRange)
         {
             //face target enemy
-            transform.LookAt(targetEnemy);
+            transform.LookAt(targetEnemy.transform);
 
             //used for attacking/shooting
             if(Time.time > shootSpeed)
             {
-                shootSpeed = Time.time + rechargeTime;
-                CmdFire();
+                shootSpeed = Time.time + rechargeTime;                
+                Fire();
             }
             
             //stops movement and animation
@@ -160,22 +156,22 @@ public class Player : NetworkBehaviour
     }
 
     //used to send commands to the server
-    [Command]
-    private void CmdFire()  //functions needs to have the Cmd prefix is order to send server spawnable objects
+    //[Command]
+    private void Fire()  //functions needs to have the Cmd prefix is order to send server spawnable objects
     {
         StartCoroutine(FirebalDelay());
     }
 
     IEnumerator FirebalDelay()
-    {
-        animator.SetTrigger("CastSpell");
+    {        
+        animator.SetTrigger("CastSpell");        
+
         GameObject fireballGO = Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
-        //fireballGO.SetActive(true);
+
         yield return new WaitForSeconds(2.0f);
-        fireballGO.GetComponentInChildren<Rigidbody>().velocity = fireballGO.transform.forward * 20f;
-
-        NetworkServer.Spawn(fireballGO);  //tells server to spawn fireball
-        Destroy(fireballGO, 5f);
-
+        fireballGO.GetComponentInChildren<Rigidbody>().velocity = firePoint.transform.forward * 20f;
+        //NetworkServer.Spawn(fireballGO);  //tells server to spawn fireball
+        
+        Destroy(fireballGO, 2.0f);
     }
 }
