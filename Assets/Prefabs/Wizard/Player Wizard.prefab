@@ -4765,7 +4765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309158367855168259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.336214, y: 17.244, z: 160.49995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1561257422993918366}
@@ -4809,8 +4809,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 6176700989385976009}
   targetEnemy: {fileID: 0}
-  EnemyList:
-  - {fileID: 7249466095670306899, guid: 594efcc6473660d4ab3622ae5bbec5f3, type: 3}
   fireballPrefab: {fileID: 4093647522165319373, guid: 72d5fce736a64174e82103859a485875,
     type: 3}
   firePoint: {fileID: 1561257422993918366}

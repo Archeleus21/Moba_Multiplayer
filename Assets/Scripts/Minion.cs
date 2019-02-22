@@ -6,14 +6,14 @@ using UnityEngine;
 public class Minion : MonoBehaviour
 {
     [SerializeField] private GameObject currentTarget;  //current target
-    [SerializeField] private Player player;
+    [SerializeField] private GameObject player;
 
     private NavMeshAgent minionAgent;  //reference to nav agent
     private Animator animator;  //reference to animator
 
     private int health = 10;
-    private int attackRange = 3;  //attack range
-    private int detectionRadius = 5;
+    private int attackRange = 2;  //attack range
+    private int detectionRadius = 10;
 
     private bool isWalking = false;  //am i walking?
     private bool isAttacking = false;  //am i attacking?
@@ -22,6 +22,8 @@ public class Minion : MonoBehaviour
     {
         minionAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        player = GameObject.Find("Player Wizard(Clone)");
     }
 
     // Update is called once per frame

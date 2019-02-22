@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Player Minions")]
     [SerializeField] private GameObject playerMinionPrefab;  //player minions prefab
     [SerializeField] private GameObject playerMinionSpawn;  //where minions spawn
-    [SerializeField] public List<GameObject> playerMinionList = new List<GameObject>();  //player minions
+    [SerializeField] public List<GameObject> playerMinionList;  //player minions
 
     [Header("Neutral Towers")]
     [SerializeField] public GameObject[] neutralTowers = new GameObject[2];  //neutral towers
@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Enemy Minions")]
     [SerializeField] private GameObject enemyMinionPrefab;  //enemy minions
     [SerializeField] private Transform enemyMinionSpawn; //where enemy minions spawn
-    [SerializeField] public List<GameObject> enemyMinionList = new List<GameObject>();  //enemy minion list
+    [SerializeField] public List<GameObject> enemyMinionList;  //enemy minion list
     
     private int minionSpawnCount = 0;
 
@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
         while (minionSpawnCount < 15)
         {
             minionSpawnCount++;
-            GameObject enemyGO = Instantiate(playerMinionPrefab, playerMinionSpawn.transform.position, Quaternion.identity);
+            GameObject enemyGO = Instantiate(playerMinionPrefab, playerMinionSpawn.transform.position, Quaternion.identity, GameObject.Find("MinionManager").transform);
             playerMinionList.Add(enemyGO);  //add to list
             yield return new WaitForSeconds(1.0f);
         }

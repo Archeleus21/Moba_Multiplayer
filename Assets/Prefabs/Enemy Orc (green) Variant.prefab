@@ -27,7 +27,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.84
   m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!114 &933396587
 MonoBehaviour:
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  player: {fileID: 1561257422194993649, guid: 37f56caae7fb43a49aa796ea1569c993, type: 3}
+  player: {fileID: 309158367855168259, guid: 37f56caae7fb43a49aa796ea1569c993, type: 3}
 --- !u!195 &1181226193081727064
 NavMeshAgent:
   m_ObjectHideFlags: 0

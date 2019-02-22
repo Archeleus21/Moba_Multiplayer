@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;  //reference to the camera
-    [SerializeField] private GameObject targetEnemy;  //reference to enemy
+    [SerializeField] private Transform targetEnemy;  //reference to enemy
     [SerializeField] private GameObject fireballPrefab;  //reference to fireball
     [SerializeField] private Transform firePoint;  //reference to fire point transform
     [SerializeField] private GameObject playerIdentification; //reference to the local player
@@ -66,38 +66,41 @@ public class Player : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        navAgent.speed = 7f;
+
         //right click
         if (Input.GetButtonDown("Fire2"))
         {
             //raycast from mouse position, (shoots ray, outputs what it hit, distance ray goes)
             if (Physics.Raycast(ray, out hit, 100))
             {
-
                 //contains list of enemies in game and checks if clicked
-                foreach(GameObject enemy in GameManager.Instance.playerMinionList)  ///update to enemy list
+                foreach(GameObject enemyMinion in GameManager.Instance.playerMinionList)  ///TODO update to enemy list
                 {
-                    if(hit.collider.gameObject == enemy)
+                    if(hit.collider.gameObject == enemyMinion)
                     {
                         print("raycast: " + hit.transform.name);
-                        targetEnemy = hit.transform.gameObject;  //make clicked enemy the target enemy
+                        targetEnemy = hit.transform;  //make clicked enemy the target enemy
                         print("my target: " + targetEnemy.name);
                         enemyClicked = true;  //clicked enemy
+                        print(enemyClicked);
                     }
                     else  //otherwise move character
                     {
                         targetEnemy = null;  //remove target
                         isWalking = true;  //walking
                         enemyClicked = false;  //didnt click enemy
+                        //print(enemyClicked);
                         navAgent.destination = hit.point;  //sets destination
                         navAgent.isStopped = false;  //checks if player has stopped
                     }
                 }
 
-                //checks player has a targetEnemy
-                if (targetEnemy != null)
-                {
-                    enemyClicked = true;  //clicked enemy
-                }
+                ////checks player has a targetEnemy
+                //if (targetEnemy != null)
+                //{
+                //    enemyClicked = true;  //clicked enemy
+                //}
 
             }
         }
@@ -134,11 +137,7 @@ public class Player : MonoBehaviour
         {
             navAgent.isStopped = true;
             isWalking = false;
-        }
 
-        //shoots if in range
-        if (navAgent.remainingDistance <=shootRange)
-        {
             //face target enemy
             transform.LookAt(targetEnemy.transform);
 
