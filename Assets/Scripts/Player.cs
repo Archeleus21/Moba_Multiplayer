@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 //contains list of enemies in game and checks if clicked
-                foreach(GameObject enemyMinion in GameManager.Instance.playerMinionList)  ///TODO update to enemy list
+                foreach(GameObject enemyMinion in GameManager.Instance.minionAList)  ///TODO update to enemy list
                 {
                     if(hit.collider.gameObject == enemyMinion)
                     {

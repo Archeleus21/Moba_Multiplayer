@@ -4,37 +4,55 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    private Minion minionInstance;
+
     [Header("Player")]
     [SerializeField] private GameObject playerPrefab; //player prefab
     [SerializeField] private Transform playerSpawnPoint; //where player spawns
-    [SerializeField] public GameObject[] playerTowers = new GameObject[4];  //player towers
-
-    [Header("Player Minions")]
-    [SerializeField] private GameObject playerMinionPrefab;  //player minions prefab
-    [SerializeField] private GameObject playerMinionSpawn;  //where minions spawn
-    [SerializeField] public List<GameObject> playerMinionList;  //player minions
-
-    [Header("Neutral Towers")]
-    [SerializeField] public GameObject[] neutralTowers = new GameObject[2];  //neutral towers
 
     [Header("Enemy")]
     [SerializeField] private GameObject enemyPrefab;  //Enemy Player prefab
     [SerializeField] private Transform enemySpawnPoint;  //where enemy spawns
-    [SerializeField] public GameObject[] enemyTowers = new GameObject[4];  //enemy towers
 
-    [Header("Enemy Minions")]
-    [SerializeField] private GameObject enemyMinionPrefab;  //enemy minions
-    [SerializeField] private Transform enemyMinionSpawn; //where enemy minions spawn
-    [SerializeField] public List<GameObject> enemyMinionList;  //enemy minion list
-    
+    [Header("Team A Minions")]
+    [SerializeField] private GameObject minionAPrefab;  //player minions prefab
+    [SerializeField] public GameObject[] minionASpawnPoint;  //where minions spawn
+    [SerializeField] public List<GameObject> minionAList;  //player minions
+
+    [Header("Team B Minions")]
+    [SerializeField] private GameObject minionBPrefab;  //enemy minions
+    [SerializeField] private GameObject[] minionBSpawnPoint; //where enemy minions spawn
+    [SerializeField] public List<GameObject> minionBList;  //enemy minion list
+
+    [Header("Towers")]
+    [SerializeField] public GameObject[] teamATowers = new GameObject[9];  //player towers
+    [SerializeField] public GameObject[] teamBTowers = new GameObject[9];  //enemy towers
+           
     private int minionSpawnCount = 0;
+    private int minionSpawnLocation;
+
+
 
     //------------------------------------------------------------------------------------------
     //getters
     //------------------------------------------------------------------------------------------
 
+
+    public int MinionSpawnLocation
+    {
+        get
+        {
+            return minionSpawnLocation;
+        }
+        set
+        {
+            minionSpawnLocation = value;
+        }
+    }
+
     private void Start()
     {
+
         SpawnPlayer();
         StartCoroutine(PlayerMinionWaves());
     }
@@ -44,11 +62,35 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitForSeconds(1.0f);
 
-        while (minionSpawnCount < 15)
+        while (minionSpawnCount < 5)
         {
             minionSpawnCount++;
-            GameObject enemyGO = Instantiate(playerMinionPrefab, playerMinionSpawn.transform.position, Quaternion.identity, GameObject.Find("MinionManager").transform);
-            playerMinionList.Add(enemyGO);  //add to list
+            for (int i = 0; i < minionASpawnPoint.Length; i++)
+            {
+                GameObject enemyGO = Instantiate(minionAPrefab, minionASpawnPoint[i].transform.position, Quaternion.identity, GameObject.Find("MinionManager").transform);
+                minionInstance = enemyGO.GetComponent<Minion>();
+                switch (i)
+                {
+                    case 0:
+                        minionInstance.IsLeft = true;
+                        minionInstance.IsMid = false;
+                        minionInstance.IsRight = false;
+                        break;
+                    case 1:
+                        minionInstance.IsLeft = false;
+                        minionInstance.IsMid = true;
+                        minionInstance.IsRight = false;
+                        break;
+                    case 2:
+                        minionInstance.IsLeft = false;
+                        minionInstance.IsMid = false;
+                        minionInstance.IsRight = true;
+                        break;
+                    default:
+                        break;
+                }
+                minionAList.Add(enemyGO);  //add to list
+            }
             yield return new WaitForSeconds(1.0f);
         }
 
@@ -58,13 +100,13 @@ public class GameManager : Singleton<GameManager>
     //add to list
     public void RegisterEnemy(GameObject enemy)
     {
-        playerMinionList.Add(enemy);
+        minionAList.Add(enemy);
     }
 
     //remove from list
     public void UnRegisterEnemy(GameObject enemy)
     {
-        playerMinionList.Remove(enemy);
+        minionAList.Remove(enemy);
     }
 
     //spawn player

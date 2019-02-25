@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Minion : MonoBehaviour
 {
+    public static GameObject instance;
+
     [SerializeField] private GameObject currentTarget;  //current target
     [SerializeField] private GameObject player;
 
@@ -17,6 +19,47 @@ public class Minion : MonoBehaviour
 
     private bool isWalking = false;  //am i walking?
     private bool isAttacking = false;  //am i attacking?
+
+    [SerializeField] private bool isLeft;
+    [SerializeField] private bool isMid;
+    [SerializeField] private bool isRight;
+
+    //--------------------------------------------------------------------------
+    //getters / setters
+    //--------------------------------------------------------------------------
+    public bool IsLeft
+    {
+        get
+        {
+            return isLeft;
+        }
+        set
+        {
+            isLeft = value;
+        }
+    }
+    public bool IsMid
+    {
+        get
+        {
+            return isMid;
+        }
+        set
+        {
+            isMid = value;
+        }
+    }
+    public bool IsRight
+    {
+        get
+        {
+            return isRight;
+        }
+        set
+        {
+            isRight = value;
+        }
+    }
 
     private void Start()
     {
@@ -63,13 +106,33 @@ public class Minion : MonoBehaviour
         //float playerDistance = Mathf.RoundToInt((transform.position - player.transform.position).magnitude);
         //print(playerDistance);
 
+        //detects player
         if(Vector3.Distance(transform.localPosition, player.transform.localPosition) <= detectionRadius)
         {
             currentTarget = player.gameObject;
         }
         else
         {
-            currentTarget = GameManager.Instance.neutralTowers[0];
+            if(IsLeft)
+            {
+                currentTarget = GameManager.Instance.teamBTowers[2];
+                if(GameManager.Instance.teamBTowers[2] == null)
+                {
+                    currentTarget = GameManager.Instance.teamBTowers[1];
+                    if(GameManager.Instance.teamBTowers[1] == null)
+                    {
+                        currentTarget = GameManager.Instance.teamBTowers[0];
+                    }
+                }
+            }
+            else if(IsMid)
+            {
+                currentTarget = GameManager.Instance.teamBTowers[5];
+            }
+            else if(IsRight)
+            {
+                currentTarget = GameManager.Instance.teamBTowers[8];
+            }
         }
 
         return currentTarget;
