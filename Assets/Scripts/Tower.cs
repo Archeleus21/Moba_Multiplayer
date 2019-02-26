@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Tower : Singleton<Tower>
 {
-    [SerializeField] int towerHP = 5;
-    [SerializeField] bool isDestroyed = false;
-    [SerializeField] bool isTeamATower = false;
-    [SerializeField] bool isTeamBTower = false;
+    [SerializeField] private int towerHP = 5;
+    [SerializeField] private bool isDestroyed = false;
+    [SerializeField] private bool isTeamATower = false;
+    [SerializeField] private bool isTeamBTower = false;
 
     //-------------------------------------------------
     //getter/setter
@@ -21,10 +21,7 @@ public class Tower : Singleton<Tower>
         }
         set
         {
-            if (towerHP <= 0)
-            {
-                isDestroyed = true;
-            }
+            isDestroyed = value;
         }
     }
 
@@ -37,9 +34,34 @@ public class Tower : Singleton<Tower>
     // Update is called once per frame
     void Update()
     {
-        if(IsDestroyed && isTeamBTower)
+        TowerDestroyed(IsDestroyed);
+    }
+
+    //take damage
+    public void TakeDamage(int damage)
+    {
+        towerHP -= damage;
+        if(towerHP <= 0)
         {
-            Destroy(gameObject);
+            IsDestroyed = true;
+        }
+    }
+
+    //destroy tower
+    private void TowerDestroyed(bool isDestroyed)
+    {
+        if(isDestroyed)
+        {
+            if (isTeamBTower)
+            {
+                GameManager.Instance.UnRegisterTeamBTower(gameObject);
+                Destroy(gameObject);
+            }
+            else
+            {
+                GameManager.Instance.UnRegisterTeamATower(gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }

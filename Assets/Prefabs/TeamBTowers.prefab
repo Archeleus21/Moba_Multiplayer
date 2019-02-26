@@ -1,5 +1,113 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000146228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000146229}
+  - component: {fileID: 1000146233}
+  - component: {fileID: 1000146232}
+  - component: {fileID: 1000146231}
+  - component: {fileID: 1000146230}
+  m_Layer: 0
+  m_Name: B_RightSide1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1000146229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000146228}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 22.820004, y: 18.17, z: -49.920002}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_Children: []
+  m_Father: {fileID: 4701522376055905932}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1000146233
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000146228}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1000146232
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000146228}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 6773a3efc6b152540b4415c49217521b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!135 &1000146231
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000146228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1000146230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000146228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522374127691020
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,12 +120,13 @@ GameObject:
   - component: {fileID: 4701522374127691016}
   - component: {fileID: 4701522374127691017}
   - component: {fileID: 4701522374127691022}
+  - component: {fileID: 1285674350}
   m_Layer: 0
-  m_Name: Mid3
+  m_Name: B_Mid3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522374127691023
 Transform:
@@ -91,6 +200,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1285674350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522374127691020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522374146150208
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,12 +228,13 @@ GameObject:
   - component: {fileID: 4701522374146150220}
   - component: {fileID: 4701522374146150221}
   - component: {fileID: 4701522374146150210}
+  - component: {fileID: 1330069290}
   m_Layer: 0
-  m_Name: Mid2
+  m_Name: B_Mid2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522374146150211
 Transform:
@@ -182,6 +308,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1330069290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522374146150208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522374347478188
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,12 +336,13 @@ GameObject:
   - component: {fileID: 4701522374347478184}
   - component: {fileID: 4701522374347478185}
   - component: {fileID: 4701522374347478190}
+  - component: {fileID: 1531389134}
   m_Layer: 0
-  m_Name: LeftSide1
+  m_Name: B_LeftSide1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522374347478191
 Transform:
@@ -273,6 +416,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1531389134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522374347478188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522374894784468
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,12 +444,13 @@ GameObject:
   - component: {fileID: 4701522374894784464}
   - component: {fileID: 4701522374894784465}
   - component: {fileID: 4701522374894784470}
+  - component: {fileID: 2062090166}
   m_Layer: 0
-  m_Name: Mid1
+  m_Name: B_Mid1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522374894784471
 Transform:
@@ -364,6 +524,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2062090166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522374894784468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522375322904009
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,12 +552,13 @@ GameObject:
   - component: {fileID: 4701522375322904021}
   - component: {fileID: 4701522375322904010}
   - component: {fileID: 4701522375322904011}
+  - component: {fileID: 90396081}
   m_Layer: 0
-  m_Name: RightSide2
+  m_Name: B_RightSide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522375322904008
 Transform:
@@ -391,7 +568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701522375322904009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 52.4, y: 18.17, z: -10.700001}
+  m_LocalPosition: {x: 58.9, y: 18.17, z: -10.700001}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4701522376055905932}
@@ -455,6 +632,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &90396081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522375322904009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522375515645530
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,12 +660,13 @@ GameObject:
   - component: {fileID: 4701522375515645478}
   - component: {fileID: 4701522375515645479}
   - component: {fileID: 4701522375515645476}
+  - component: {fileID: 300308036}
   m_Layer: 0
-  m_Name: RightSide3
+  m_Name: B_RightSide3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522375515645477
 Transform:
@@ -482,7 +676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701522375515645530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 55.07, y: 18.17, z: 31.859997}
+  m_LocalPosition: {x: 60.3, y: 18.17, z: 31.859997}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4701522376055905932}
@@ -546,6 +740,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &300308036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522375515645530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522375545656936
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,12 +768,13 @@ GameObject:
   - component: {fileID: 4701522375545656948}
   - component: {fileID: 4701522375545656949}
   - component: {fileID: 4701522375545656938}
+  - component: {fileID: 272393746}
   m_Layer: 0
-  m_Name: LeftSide2
+  m_Name: B_LeftSide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522375545656939
 Transform:
@@ -573,7 +784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701522375545656936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.800003, y: 18.17, z: -10.700001}
+  m_LocalPosition: {x: -57.6, y: 18.17, z: -10.700001}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4701522376055905932}
@@ -637,6 +848,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &272393746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522375545656936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522375625095148
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,12 +876,13 @@ GameObject:
   - component: {fileID: 4701522375625095144}
   - component: {fileID: 4701522375625095145}
   - component: {fileID: 4701522375625095150}
+  - component: {fileID: 392185742}
   m_Layer: 0
-  m_Name: LeftSide3
+  m_Name: B_LeftSide3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4701522375625095151
 Transform:
@@ -664,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701522375625095148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.800003, y: 18.17, z: 31.859999}
+  m_LocalPosition: {x: -56.6, y: 18.17, z: 31.859999}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 4701522376055905932}
@@ -728,6 +956,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &392185742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701522375625095148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8d1ab730826164598e225a8297961c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerHP: 5
+  isDestroyed: 0
+  isTeamATower: 0
+  isTeamBTower: 1
 --- !u!1 &4701522376055905933
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +999,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4701522376119630495}
+  - {fileID: 1000146229}
   - {fileID: 4701522375322904008}
   - {fileID: 4701522375515645477}
   - {fileID: 4701522374894784471}
@@ -767,94 +1011,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4701522376119630492
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4701522376119630495}
-  - component: {fileID: 4701522376119630488}
-  - component: {fileID: 4701522376119630489}
-  - component: {fileID: 4701522376119630494}
-  m_Layer: 0
-  m_Name: RightSide1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4701522376119630495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701522376119630492}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.820004, y: 18.17, z: -49.920002}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
-  m_Father: {fileID: 4701522376055905932}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4701522376119630488
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701522376119630492}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4701522376119630489
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701522376119630492}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6773a3efc6b152540b4415c49217521b, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!135 &4701522376119630494
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701522376119630492}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

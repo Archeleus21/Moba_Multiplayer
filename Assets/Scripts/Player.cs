@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
             //used for attacking/shooting
             if(Time.time > shootSpeed)
             {
-                shootSpeed = Time.time + rechargeTime;                
+                shootSpeed = Time.time + rechargeTime;
                 Fire();
             }
             

@@ -25,8 +25,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public List<GameObject> minionBList;  //enemy minion list
 
     [Header("Towers")]
-    [SerializeField] public GameObject[] teamATowers = new GameObject[9];  //player towers
-    [SerializeField] public GameObject[] teamBTowers = new GameObject[9];  //enemy towers
+    [SerializeField] public List<GameObject> teamATowers;  //player towers
+    [SerializeField] public List<GameObject> teamBTowers;  //enemy towers
            
     private int minionSpawnCount = 0;
     private int minionSpawnLocation;
@@ -107,6 +107,31 @@ public class GameManager : Singleton<GameManager>
     public void UnRegisterEnemy(GameObject enemy)
     {
         minionAList.Remove(enemy);
+    }
+
+    //register tower
+    public void RegisterTeamATower(GameObject tower)
+    {
+        teamATowers.Add(tower);
+    }
+
+    //unregister tower
+    public void UnRegisterTeamATower(GameObject tower)
+    {
+        teamATowers.Remove(tower);
+    }
+
+
+    //register tower
+    public void RegisterTeamBTower(GameObject tower)
+    {
+        teamBTowers.Add(tower);
+    }
+
+    //unregister tower
+    public void UnRegisterTeamBTower(GameObject tower)
+    {
+        teamBTowers.Remove(tower);
     }
 
     //spawn player
