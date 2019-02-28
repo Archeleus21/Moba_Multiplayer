@@ -45,7 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 309158367855168259, guid: 37f56caae7fb43a49aa796ea1569c993,
     type: 3}
-  playerSpawnPoint: {fileID: 0}
+  playerSpawnPoint: {fileID: 2922884039569153351, guid: ad45f82ddece87a4fa1bb506ae68543d,
+    type: 3}
   enemyPrefab: {fileID: 0}
   enemySpawnPoint: {fileID: 0}
   minionAPrefab: {fileID: 7249466095670473843, guid: 594efcc6473660d4ab3622ae5bbec5f3,
