@@ -5,13 +5,48 @@ using UnityEngine;
 public class Tower : Singleton<Tower>
 {
     [SerializeField] private int towerHP = 5;
+    [SerializeField] private int shootRange = 10;
+    [SerializeField] private float shootSpeed = 2.0f;
+    [SerializeField] private int towerDamage = 5;
     [SerializeField] private bool isDestroyed = false;
     [SerializeField] private bool isTeamATower = false;
     [SerializeField] private bool isTeamBTower = false;
+    [SerializeField] private bool isRight;
+    [SerializeField] private bool isMid;
+    [SerializeField] private bool isLeft;
+
+    [SerializeField] private GameObject currentTarget;
+    [SerializeField] private GameObject nearestTarget;
+    [SerializeField] private List<GameObject> NearestEnemy;
+    [SerializeField] public List<GameObject> EnemyTargetList;
 
     //-------------------------------------------------
     //getter/setter
     //-------------------------------------------------
+
+    public bool IsRight
+    {
+        get
+        {
+            return isRight;
+        }
+    }
+
+    public bool IsMid
+    {
+        get
+        {
+            return isMid;
+        }
+    }
+
+    public bool IsLeft
+    {
+        get
+        {
+            return isLeft;
+        }
+    }
 
     public bool IsDestroyed
     {
@@ -34,6 +69,8 @@ public class Tower : Singleton<Tower>
     // Update is called once per frame
     void Update()
     {
+        UpdateNearestTarget();
+        GetTarget();
         TowerDestroyed(IsDestroyed);
     }
 
@@ -63,5 +100,60 @@ public class Tower : Singleton<Tower>
                 Destroy(gameObject);
             }
         }
+    }
+
+    //build target list
+    private GameObject UpdateNearestTarget()
+    {
+        foreach(GameObject minion in GameManager.Instance.minionAList)
+        {
+            if(Mathf.Abs(Vector3.Distance(minion.transform.position, gameObject.transform.position)) <= shootRange)
+            {
+                nearestTarget = minion;
+            }
+            else
+            {
+                nearestTarget = null;
+            }
+        }
+        return nearestTarget;
+    }
+
+    //get nearest target
+    private void GetTarget()
+    {
+        if (nearestTarget != null)
+        {
+            foreach (GameObject target in NearestEnemy)
+            {
+                if (Mathf.Abs(Vector3.Distance(UpdateNearestTarget().transform.position, gameObject.transform.position)) < Mathf.Abs(Vector3.Distance(target.transform.position, gameObject.transform.position)))
+                {
+                    currentTarget = nearestTarget;
+                }
+                else
+                {
+                    currentTarget = target;
+                }
+            }
+        }
+    }
+
+    //register target list
+    public void RegisterEnemyTarget(GameObject targetInRange)
+    {
+        EnemyTargetList.Add(targetInRange);
+    }
+
+
+    //remove targets from list
+    public void UnRegisterEnemyTarget(GameObject targetNotinRange)
+    {
+        EnemyTargetList.Remove(targetNotinRange);
+    }
+
+    IEnumerator ShootTarget()
+    {
+        Minion.Instance.TakeDamage(towerDamage);
+        yield return new WaitForSeconds(shootSpeed);
     }
 }

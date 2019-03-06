@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Minion : MonoBehaviour
 {
-    public static Minion instance;
+    public static Minion Instance;
 
     [SerializeField] private GameObject currentTarget = null;  //current target
     [SerializeField] private GameObject player;
@@ -22,7 +22,7 @@ public class Minion : MonoBehaviour
     private int health = 10;
     private int attackRange = 3;  //attack range
     private int detectionRadius = 10;
-    private float attackSpeed = 2.0f;
+    private float attackSpeed = 3.0f;
     private int attackDamage = 2;
 
 
@@ -79,6 +79,63 @@ public class Minion : MonoBehaviour
         player = GameObject.Find("Player Wizard(Clone)");
 
         isAttacking = false;
+
+        if (IsLeft)
+        {            
+            foreach (GameObject tower in GameManager.Instance.teamBTowers)
+            {
+                if (tower.name == GameObject.Find("B_RightSide3").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_RightSide3")) && tower.name == GameObject.Find("B_RightSide2").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_RightSide2")) && tower.name == GameObject.Find("B_RightSide1").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+            }
+        }
+        if (IsMid)
+        {
+
+            foreach (GameObject tower in GameManager.Instance.teamBTowers)
+            {
+                if (tower.name == GameObject.Find("B_Mid3").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_Mid3")) && tower.name == GameObject.Find("B_Mid2").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_Mid2")) && tower.name == GameObject.Find("B_Mid1").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+            }
+        }
+        if (IsRight)
+        {
+            foreach (GameObject tower in GameManager.Instance.teamBTowers)
+            {
+                if (tower.name == GameObject.Find("B_LeftSide3").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_LeftSide3")) && tower.name == GameObject.Find("B_LeftSide2").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_LeftSide2")) && tower.name == GameObject.Find("B_LeftSide1").name)
+                {
+                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
+                }
+            }
+            
+        }
     }
 
     // Update is called once per frame
@@ -218,6 +275,16 @@ public class Minion : MonoBehaviour
         }
 
         isAttacking = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDrawGizmos()

@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
             minionSpawnCount++;
             for (int i = 0; i < minionASpawnPoint.Length; i++)
             {
-                GameObject enemyGO = Instantiate(minionAPrefab, minionASpawnPoint[i].transform.position, Quaternion.identity, GameObject.Find("MinionManager").transform);
+                GameObject enemyGO = Instantiate(minionAPrefab, minionASpawnPoint[i].transform.position, Quaternion.identity, minionASpawnPoint[i].transform);
                 minionInstance = enemyGO.GetComponent<Minion>();
                 switch (i)
                 {
