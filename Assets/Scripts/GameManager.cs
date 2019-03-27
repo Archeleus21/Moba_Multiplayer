@@ -52,7 +52,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-
         SpawnPlayer();
         StartCoroutine(PlayerMinionWaves());
     }
@@ -65,10 +64,12 @@ public class GameManager : Singleton<GameManager>
         while (minionSpawnCount < 5)
         {
             minionSpawnCount++;
+
             for (int i = 0; i < minionASpawnPoint.Length; i++)
             {
                 GameObject enemyGO = Instantiate(minionAPrefab, minionASpawnPoint[i].transform.position, Quaternion.identity, minionASpawnPoint[i].transform);
                 minionInstance = enemyGO.GetComponent<Minion>();
+
                 switch (i)
                 {
                     case 0:
@@ -89,10 +90,13 @@ public class GameManager : Singleton<GameManager>
                     default:
                         break;
                 }
+
                 minionAList.Add(enemyGO);  //add to list
             }
             yield return new WaitForSeconds(1.0f);
         }
+
+        yield return new WaitForSeconds(4.0f);
 
         StartCoroutine(PlayerMinionWaves());
     }

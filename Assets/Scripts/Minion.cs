@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class Minion : MonoBehaviour
+public class Minion : Singleton<Minion>
 {
-    public static Minion Instance;
-
     [SerializeField] private GameObject currentTarget = null;  //current target
     [SerializeField] private GameObject player;
 
@@ -15,20 +13,30 @@ public class Minion : MonoBehaviour
     [SerializeField] private bool isRight;
     [SerializeField] private bool isWalking = false;  //am i walking?
     [SerializeField] private bool isAttacking = false;  //am i attacking?
+    [SerializeField] private bool isDead = false;
 
     private NavMeshAgent minionAgent;  //reference to nav agent
     private Animator animator;  //reference to animator
 
-    private int health = 10;
+    [SerializeField] private int health = 5;
     private int attackRange = 3;  //attack range
     private int detectionRadius = 10;
     private float attackSpeed = 3.0f;
     private int attackDamage = 2;
 
 
+
     //--------------------------------------------------------------------------
     //getters / setters
     //--------------------------------------------------------------------------
+    public bool IsDead
+    {
+        get
+        {
+            return isDead;
+        }
+    }
+
     public bool IsLeft
     {
         get
@@ -84,15 +92,8 @@ public class Minion : MonoBehaviour
         {            
             foreach (GameObject tower in GameManager.Instance.teamBTowers)
             {
-                if (tower.name == GameObject.Find("B_RightSide3").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_RightSide3")) && tower.name == GameObject.Find("B_RightSide2").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_RightSide2")) && tower.name == GameObject.Find("B_RightSide1").name)
+
+                if (tower.GetComponent<Tower>().IsRight)
                 {
                     tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
                 }
@@ -103,15 +104,7 @@ public class Minion : MonoBehaviour
 
             foreach (GameObject tower in GameManager.Instance.teamBTowers)
             {
-                if (tower.name == GameObject.Find("B_Mid3").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_Mid3")) && tower.name == GameObject.Find("B_Mid2").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_Mid2")) && tower.name == GameObject.Find("B_Mid1").name)
+                if (tower.GetComponent<Tower>().IsMid)
                 {
                     tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
                 }
@@ -121,20 +114,11 @@ public class Minion : MonoBehaviour
         {
             foreach (GameObject tower in GameManager.Instance.teamBTowers)
             {
-                if (tower.name == GameObject.Find("B_LeftSide3").name)
+                if (tower.GetComponent<Tower>().IsLeft)
                 {
                     tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
                 }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_LeftSide3")) && tower.name == GameObject.Find("B_LeftSide2").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-                else if (!GameManager.Instance.teamBTowers.Contains(GameObject.Find("B_LeftSide2")) && tower.name == GameObject.Find("B_LeftSide1").name)
-                {
-                    tower.GetComponent<Tower>().RegisterEnemyTarget(this.gameObject);
-                }
-            }
-            
+            }            
         }
     }
 
@@ -258,8 +242,6 @@ public class Minion : MonoBehaviour
         }
     }
 
-
-
     //attack target
     IEnumerator Attack()
     {
@@ -268,8 +250,7 @@ public class Minion : MonoBehaviour
             if (currentTarget != player)
             {               
                 print("attacking");
-                currentTarget.GetComponent<Tower>().TakeDamage(AttackDamage);
-                //Tower.Instance.TakeDamage(AttackDamage);
+                currentTarget.GetComponent<Tower>().TakeDamage(AttackDamage);                
             }
             yield return new WaitForSeconds(attackSpeed);
         }
@@ -283,7 +264,16 @@ public class Minion : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(gameObject);
+            isDead = true;
+
+            Tower.Instance.UnRegisterEnemyTarget(this.gameObject);
+
+            foreach (GameObject tower in GameManager.Instance.teamBTowers)
+            {
+                tower.GetComponent<Tower>().UnRegisterEnemyTarget(this.gameObject);
+            }
+
+            Destroy(gameObject, 1.0f);
         }
     }
 

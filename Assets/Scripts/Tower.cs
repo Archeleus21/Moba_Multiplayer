@@ -5,9 +5,9 @@ using UnityEngine;
 public class Tower : Singleton<Tower>
 {
     [SerializeField] private int towerHP = 5;
-    [SerializeField] private int shootRange = 10;
+    [SerializeField] private int shootRange = 15;
     [SerializeField] private float shootSpeed = 2.0f;
-    [SerializeField] private int towerDamage = 5;
+    [SerializeField] private int towerDamage = 10;
     [SerializeField] private bool isDestroyed = false;
     [SerializeField] private bool isTeamATower = false;
     [SerializeField] private bool isTeamBTower = false;
@@ -15,14 +15,34 @@ public class Tower : Singleton<Tower>
     [SerializeField] private bool isMid;
     [SerializeField] private bool isLeft;
 
-    [SerializeField] private GameObject currentTarget;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+
+    [SerializeField] public GameObject currentTarget;
     [SerializeField] private GameObject nearestTarget;
     [SerializeField] private List<GameObject> NearestEnemy;
     [SerializeField] public List<GameObject> EnemyTargetList;
 
+    private float shootCounter;
+
     //-------------------------------------------------
     //getter/setter
     //-------------------------------------------------
+    public int TowerDamage
+    {
+        get
+        {
+            return towerDamage;
+        }
+    }
+
+    public GameObject CurrentTarget
+    {
+        get
+        {
+            return currentTarget;
+        }
+    }
 
     public bool IsRight
     {
@@ -69,8 +89,32 @@ public class Tower : Singleton<Tower>
     // Update is called once per frame
     void Update()
     {
-        UpdateNearestTarget();
+        shootCounter -= Time.deltaTime;
+
+        LoadNearestEnemies();
         GetTarget();
+
+        if (currentTarget != null && shootCounter <= 0 && currentTarget.GetComponent<Minion>().IsDead == false)
+        {
+            StartCoroutine(ShootTarget());
+            shootCounter = shootSpeed;
+        }
+        else
+        {
+            UnRegisterEnemyTarget(currentTarget.gameObject);
+            NearestEnemy.Remove(currentTarget.gameObject);
+
+        }
+
+        foreach (GameObject minion in EnemyTargetList)
+        {
+            if (minion.gameObject == null)
+            {
+                UnRegisterEnemyTarget(minion.gameObject);
+                NearestEnemy.Remove(minion.gameObject);
+            }
+        }
+
         TowerDestroyed(IsDestroyed);
     }
 
@@ -103,36 +147,43 @@ public class Tower : Singleton<Tower>
     }
 
     //build target list
-    private GameObject UpdateNearestTarget()
+    private void LoadNearestEnemies()
     {
-        foreach(GameObject minion in GameManager.Instance.minionAList)
+        foreach (GameObject nearestTarget in EnemyTargetList)
         {
-            if(Mathf.Abs(Vector3.Distance(minion.transform.position, gameObject.transform.position)) <= shootRange)
+            if (Mathf.Abs(Vector3.Distance(nearestTarget.transform.position, gameObject.transform.position)) <= shootRange)
             {
-                nearestTarget = minion;
+                if (!NearestEnemy.Contains(nearestTarget))
+                {
+                    NearestEnemy.Add(nearestTarget);
+                }
             }
             else
             {
-                nearestTarget = null;
+                return;
             }
         }
-        return nearestTarget;
     }
 
     //get nearest target
     private void GetTarget()
     {
-        if (nearestTarget != null)
+        if (currentTarget == null)
         {
             foreach (GameObject target in NearestEnemy)
             {
-                if (Mathf.Abs(Vector3.Distance(UpdateNearestTarget().transform.position, gameObject.transform.position)) < Mathf.Abs(Vector3.Distance(target.transform.position, gameObject.transform.position)))
+                if (Mathf.Abs(Vector3.Distance(target.transform.position, gameObject.transform.position)) <= shootRange)
                 {
-                    currentTarget = nearestTarget;
-                }
-                else
-                {
-                    currentTarget = target;
+                    nearestTarget = target;
+
+                    if(Mathf.Abs(Vector3.Distance(nearestTarget.transform.position, gameObject.transform.position)) < Mathf.Abs(Vector3.Distance(target.transform.position, gameObject.transform.position)))
+                    {
+                        currentTarget = nearestTarget;
+                    }
+                    else
+                    {
+                        currentTarget = target;
+                    }
                 }
             }
         }
@@ -153,7 +204,15 @@ public class Tower : Singleton<Tower>
 
     IEnumerator ShootTarget()
     {
-        Minion.Instance.TakeDamage(towerDamage);
-        yield return new WaitForSeconds(shootSpeed);
+        firePoint.transform.LookAt(currentTarget.transform.position);
+        GameObject projectileGO = Instantiate(projectilePrefab, firePoint.transform.position, firePoint.transform.rotation);
+        projectileGO.transform.rotation = firePoint.transform.rotation;
+        yield return new WaitForSecondsRealtime(shootSpeed);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shootRange);
     }
 }
